@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{ data ? 'Edit User' : 'Add User' }}</h2>
+<form [formGroup]="userForm" (ngSubmit)="save()">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="userForm.get('name')?.hasError('required')">Name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error *ngIf="userForm.get('email')?.hasError('required')">Email is required</mat-error>
+    <mat-error *ngIf="userForm.get('email')?.hasError('email')">Invalid email</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="role">
+      <mat-option value="Admin">Admin</mat-option>
+      <mat-option value="User">User</mat-option>
+    </mat-select>
+    <mat-error *ngIf="userForm.get('role')?.hasError('required')">Role is required</mat-error>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </div>
+</form>
