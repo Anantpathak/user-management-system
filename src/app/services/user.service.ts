@@ -36,11 +36,14 @@ export class UserService {
     );
     this.saveUsers(users);
   }
-  
 
   deleteUser(userId: number): void {
     const users = this.getUsers().filter(user => user.id !== userId);
     this.saveUsers(users);
+  }
+
+  sortByName(users: User[]): User[] {
+    return users.sort((a, b) => a.name.localeCompare(b.name)); // Locale-aware sorting
   }
 
   private saveUsers(users: User[]): void {
